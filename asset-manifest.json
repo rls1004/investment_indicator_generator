@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/investment_indicator_generator/static/css/main.39b78929.chunk.css",
-    "main.js": "/investment_indicator_generator/static/js/main.cbe39912.chunk.js",
-    "main.js.map": "/investment_indicator_generator/static/js/main.cbe39912.chunk.js.map",
+    "main.css": "/investment_indicator_generator/static/css/main.c4771c18.chunk.css",
+    "main.js": "/investment_indicator_generator/static/js/main.e2fb03c1.chunk.js",
+    "main.js.map": "/investment_indicator_generator/static/js/main.e2fb03c1.chunk.js.map",
     "runtime-main.js": "/investment_indicator_generator/static/js/runtime-main.a08637ce.js",
     "runtime-main.js.map": "/investment_indicator_generator/static/js/runtime-main.a08637ce.js.map",
     "static/js/2.8f1cb643.chunk.js": "/investment_indicator_generator/static/js/2.8f1cb643.chunk.js",
     "static/js/2.8f1cb643.chunk.js.map": "/investment_indicator_generator/static/js/2.8f1cb643.chunk.js.map",
     "index.html": "/investment_indicator_generator/index.html",
-    "static/css/main.39b78929.chunk.css.map": "/investment_indicator_generator/static/css/main.39b78929.chunk.css.map",
+    "static/css/main.c4771c18.chunk.css.map": "/investment_indicator_generator/static/css/main.c4771c18.chunk.css.map",
     "static/js/2.8f1cb643.chunk.js.LICENSE.txt": "/investment_indicator_generator/static/js/2.8f1cb643.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a08637ce.js",
     "static/js/2.8f1cb643.chunk.js",
-    "static/css/main.39b78929.chunk.css",
-    "static/js/main.cbe39912.chunk.js"
+    "static/css/main.c4771c18.chunk.css",
+    "static/js/main.e2fb03c1.chunk.js"
   ]
 }
