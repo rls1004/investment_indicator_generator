@@ -13,8 +13,8 @@ class Detail extends React.Component {
         if(this.state.isDone == true) return;
         const datas = await axios.get(link);
         const id = datas.data.split('byId:{"')[1].split('"')[0];
-        const getFinancePartURL = "http://financials.morningstar.com/finan/financials/getFinancePart.html?t="+id;
-        const getKeyPartURL = "http://financials.morningstar.com/finan/financials/getKeyStatPart.html?t="+id;
+        const getFinancePartURL = "https://financials.morningstar.com/finan/financials/getFinancePart.html?t="+id;
+        const getKeyPartURL = "https://financials.morningstar.com/finan/financials/getKeyStatPart.html?t="+id;
 
         const financePart = (await axios.get(getFinancePartURL)).data.componentData;
         let $ = cheerio.load(financePart);
