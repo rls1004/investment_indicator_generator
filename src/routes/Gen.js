@@ -24,7 +24,7 @@ class Gen extends React.Component {
         await this.setState({ticker: e.target.value});
     }
     getTickers = async () => {
-        const datas = await axios.get("https://cors-anywhere.herokuapp.com/https://www.morningstar.com/search?query="+this.state.ticker);
+        const datas = await axios.get("https://www.morningstar.com/search?query="+this.state.ticker);
         let $ = cheerio.load(datas.data);
         let us_result = $(".mdc-security-module");
         let search_result = us_result.get(0);
