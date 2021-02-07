@@ -15,10 +15,6 @@ const useInput = (placeValue) => {
     return { props: {value, onChange}, utils: {setValue} };
 }
 
-function withUserInput() {
-
-}
-
 class Gen extends React.Component {
     state = {
         doSearch: 0,
@@ -44,6 +40,7 @@ class Gen extends React.Component {
         const {doSearch, ticker} = this.state;
         const submit = (e) => {
             if (e.charCode == 13) this.getTickers();
+            alert(e.charCode);
         }
         return (
             <section>
