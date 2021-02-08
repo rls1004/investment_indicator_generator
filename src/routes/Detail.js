@@ -89,17 +89,21 @@ class Detail extends React.Component {
         const guruURL = "https://www.gurufocus.com/stock/"+ticker+"/summary";
         const datas2 = (await axios.get(guruURL)).data;
         $ = cheerio.load(datas2);
-        let peRatioURL = "https://www.gurufocus.com";
-        peRatioURL += $(".stock-indicator-table")[2].childNodes[2].children[0].children[0].children[0].attribs.href;
-
-        const datas3 = (await axios.get(peRatioURL)).data;
-        $ = cheerio.load(datas3);
         let per = [];
-        cur = $(".R10").get(0).children[3].children[2].children[11];
-        for(let i=0; i<5; i++) {
-            let tmp = cur.next.next.children[0].data;
-            cur = cur.next.next;
-            per.push(tmp);
+        try {
+            let peRatioURL = "https://www.gurufocus.com";
+            peRatioURL += $(".stock-indicator-table")[2].childNodes[2].children[0].children[0].children[0].attribs.href;
+
+            const datas3 = (await axios.get(peRatioURL)).data;
+            $ = cheerio.load(datas3);
+            cur = $(".R10").get(0).children[3].children[2].children[11];
+            for(let i=0; i<5; i++) {
+                let tmp = cur.next.next.children[0].data;
+                cur = cur.next.next;
+                per.push(tmp);
+            }
+        } catch (e) {
+            per = ['—','—','—','—','—','-'];
         }
 
         inv['oi'] = oi;
