@@ -9,6 +9,18 @@ class Detail extends React.Component {
         isDone: false,
         investment: {}
     }
+
+    getDataFromFinancePart = ($, searchClass) => {
+        let result = [];
+        let cur = $(searchClass).get(0).next.next.next.next.next.next;
+        for(let i=0; i<6; i++) {
+            let tmp = cur.children[0].data;
+            cur = cur.next;
+            result.push(tmp);
+        }
+        return result;
+    }
+
     getFullKeyRatio = async (link, ticker) => {
         if(this.state.isDone == true) return;
         const datas = await axios.get(link);
@@ -21,55 +33,15 @@ class Detail extends React.Component {
 
         let inv = {};
 
-        let oi = [];
-        let cur = $("#i2").get(0);
-        for(let i=0; i<11; i++) {
-            let tmp = cur.next.children[0].data;
-            cur = cur.next;
-            if (i>4) oi.push(tmp);
-        }
-
-        let om = [];
-        cur = $("#i3").get(0);
-        for(let i=0; i<11; i++) {
-            let tmp = cur.next.children[0].data;
-            cur = cur.next;
-            if (i>4) om.push(tmp);
-        }
-        let eps = [];
-        cur = $("#i5").get(0);
-        for(let i=0; i<11; i++) {
-            let tmp = cur.next.children[0].data;
-            cur = cur.next;
-            if (i>4) eps.push(tmp);
-        }
-
-        let fcfps = [];
-        cur = $("#i90").get(0);
-        for(let i=0; i<11; i++) {
-            let tmp = cur.next.children[0].data;
-            cur = cur.next;
-            if (i>4) fcfps.push(tmp);
-        }
-
-        let shares = [];
-        cur = $("#i7").get(0);
-        for(let i=0; i<11; i++) {
-            let tmp = cur.next.children[0].data;
-            cur = cur.next;
-            if (i>4) shares.push(tmp);
-        }
-
-        let dividends = [];
-        cur = $("#i6").get(0);
-        for(let i=0; i<11; i++) {
-            let tmp = cur.next.children[0].data;
-            cur = cur.next;
-            if (i>4) dividends.push(tmp);
-        }
+        let oi = this.getDataFromFinancePart($, "#i2");
+        let om = this.getDataFromFinancePart($, "#i3");
+        let eps = this.getDataFromFinancePart($, "#i5");
+        let fcfps = this.getDataFromFinancePart($, "#i90");
+        let shares = this.getDataFromFinancePart($, "#i7");
+        let dividends = this.getDataFromFinancePart($, "#i6");
 
         let years = [];
-        cur = $("tr").get(0).children[5];
+        let cur = $("tr").get(0).children[5];
         for(let i=0; i<6; i++) {
             let tmp = cur.next.children[0].data;
             cur = cur.next;
@@ -102,8 +74,9 @@ class Detail extends React.Component {
                 cur = cur.next.next;
                 per.push(tmp);
             }
+            per.push('—');
         } catch (e) {
-            per = ['—','—','—','—','—','-'];
+            per = ['—','—','—','—','—','—'];
         }
 
         inv['oi'] = oi;
@@ -132,61 +105,63 @@ class Detail extends React.Component {
                     {isDone? (
                         <table>
                             <thead>
-                            <tr>
-                                <th></th>
-                                {investment.years.map((val) => (
-                                    (<th>{val}</th>)
-                                ))}
-                            </tr>
+                                <tr>
+                                    <th></th>
+                                    {investment.years.map((val) => (
+                                        (<th key={val}>{val}</th>)
+                                    ))}
+                                </tr>
                             </thead>
-                            <tr>
-                                <th>영업 이익</th>
-                                {investment.oi.map((val) => (
-                                    (<td>{val}</td>)
-                                ))}
-                            </tr>
-                            <tr>
-                                <th>영업 이익률</th>
-                                {investment.om.map((val) => (
-                                    (<td>{val}%</td>)
-                                ))}
-                            </tr>
-                            <tr>
-                                <th>EPS</th>
-                                {investment.eps.map((val) => (
-                                    (<td>{val}</td>)
-                                ))}
-                            </tr>
-                            <tr>
-                                <th>Free Cash Flow Per Share</th>
-                                {investment.fcfps.map((val) => (
-                                    (<td>{val}</td>)
-                                ))}
-                            </tr>
-                            <tr>
-                                <th>주식 수</th>
-                                {investment.shares.map((val) => (
-                                    (<td>{val}</td>)
-                                ))}
-                            </tr>
-                            <tr>
-                                <th>ROE</th>
-                                {investment.roe.map((val) => (
-                                    (<td>{val}</td>)
-                                ))}
-                            </tr>
-                            <tr>
-                                <th>배당금</th>
-                                {investment.dividends.map((val) => (
-                                    (<td>{val}</td>)
-                                ))}
-                            </tr>
-                            <tr>
-                                <th>PER</th>
-                                {investment.per.map((val) => (
-                                    (<td>{val}</td>)
-                                ))}
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <th>영업 이익</th>
+                                    {investment.oi.map((val, i) => (
+                                        (<td key={i}>{val}</td>)
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <th>영업 이익률</th>
+                                    {investment.om.map((val, i) => (
+                                        (<td key={i}>{val}%</td>)
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <th>EPS</th>
+                                    {investment.eps.map((val,  i) => (
+                                        (<td key={i}>{val}</td>)
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <th>Free Cash Flow Per Share</th>
+                                    {investment.fcfps.map((val, i) => (
+                                        (<td key={i}>{val}</td>)
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <th>주식 수</th>
+                                    {investment.shares.map((val, i) => (
+                                        (<td key={i}>{val}</td>)
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <th>ROE</th>
+                                    {investment.roe.map((val, i) => (
+                                        (<td key={i}>{val}</td>)
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <th>배당금</th>
+                                    {investment.dividends.map((val, i) => (
+                                        (<td key={i}>{val}</td>)
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <th>PER</th>
+                                    {investment.per.map((val, i) => (
+                                        (<td key={i}>{val}</td>)
+                                    ))}
+                                </tr>
+                            </tbody>
                         </table>
                     ):(
                         <div>Loading...</div>
